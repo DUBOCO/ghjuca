@@ -1,3 +1,5 @@
+export type Accent = "gold" | "pink";
+
 export type Product = {
   slug: string;
   name: string;
@@ -7,12 +9,13 @@ export type Product = {
   details: string[];
   sizes: string[];
   color: string;
-  swatch: string; // couleur hex pour le visuel placeholder
+  base: "black" | "white"; // couleur dominante du vêtement
+  accent: Accent; // couleur d'accent brodée/imprimée
 };
 
 export const products: Product[] = [
   {
-    slug: "polo-technique-homme-navy",
+    slug: "polo-technique-homme-noir",
     name: "Polo Technique Ghjucà",
     category: "Homme",
     price: 69,
@@ -22,14 +25,15 @@ export const products: Product[] = [
       "Tissu technique 4-way stretch anti-transpiration",
       "Traitement anti-odeur",
       "Coupe ajustée athlétique",
-      "Broderie Ghjucà sur la poitrine",
+      "Broderie Ghjucà et liseré or sur la poitrine",
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
-    color: "Bleu Navy",
-    swatch: "#14283a",
+    color: "Noir / Or",
+    base: "black",
+    accent: "gold",
   },
   {
-    slug: "short-performance-homme-argile",
+    slug: "short-performance-homme-noir",
     name: "Short Performance",
     category: "Homme",
     price: 59,
@@ -42,11 +46,12 @@ export const products: Product[] = [
       "Découpe articulée pour la mobilité",
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
-    color: "Argile",
-    swatch: "#c1502e",
+    color: "Noir / Or",
+    base: "black",
+    accent: "gold",
   },
   {
-    slug: "debardeur-technique-femme-sable",
+    slug: "debardeur-technique-femme-blanc",
     name: "Débardeur Technique",
     category: "Femme",
     price: 49,
@@ -56,14 +61,15 @@ export const products: Product[] = [
       "Séchage rapide",
       "Coupe ajustée féminine",
       "Empiècements respirants dans le dos",
-      "Logo Ghjucà discret",
+      "Signature Ghjucà rose sur la poitrine",
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
-    color: "Sable",
-    swatch: "#f2e9dc",
+    color: "Blanc / Rose",
+    base: "white",
+    accent: "pink",
   },
   {
-    slug: "jupe-short-femme-navy",
+    slug: "jupe-short-femme-blanc",
     name: "Jupe-Short Performance",
     category: "Femme",
     price: 65,
@@ -76,11 +82,12 @@ export const products: Product[] = [
       "Taille haute confortable",
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
-    color: "Bleu Navy",
-    swatch: "#14283a",
+    color: "Blanc / Rose",
+    base: "white",
+    accent: "pink",
   },
   {
-    slug: "veste-coupe-vent-unisexe-sauge",
+    slug: "veste-coupe-vent-unisexe-noir",
     name: "Veste Coupe-Vent",
     category: "Accessoires",
     price: 89,
@@ -93,11 +100,12 @@ export const products: Product[] = [
       "Fermeture éclair YKK",
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
-    color: "Sauge",
-    swatch: "#3f5d4b",
+    color: "Noir / Or",
+    base: "black",
+    accent: "gold",
   },
   {
-    slug: "polo-technique-femme-argile",
+    slug: "polo-technique-femme-blanc",
     name: "Polo Technique Ghjucà",
     category: "Femme",
     price: 69,
@@ -107,14 +115,15 @@ export const products: Product[] = [
       "Tissu technique 4-way stretch",
       "Traitement anti-odeur",
       "Coupe ajustée féminine",
-      "Broderie Ghjucà sur la poitrine",
+      "Broderie Ghjucà et liseré rose sur la poitrine",
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
-    color: "Argile",
-    swatch: "#c1502e",
+    color: "Blanc / Rose",
+    base: "white",
+    accent: "pink",
   },
   {
-    slug: "casquette-ghjuca-navy",
+    slug: "casquette-ghjuca-noir",
     name: "Casquette Ghjucà",
     category: "Accessoires",
     price: 29,
@@ -123,14 +132,15 @@ export const products: Product[] = [
       "Tissu léger et respirant",
       "Bandeau anti-transpiration",
       "Taille ajustable",
-      "Logo Ghjucà brodé",
+      "Logo Ghjucà brodé or",
     ],
     sizes: ["Taille unique"],
-    color: "Bleu Navy",
-    swatch: "#14283a",
+    color: "Noir / Or",
+    base: "black",
+    accent: "gold",
   },
   {
-    slug: "sac-padel-ghjuca-argile",
+    slug: "sac-padel-ghjuca-noir",
     name: "Sac de Padel Ghjucà",
     category: "Accessoires",
     price: 119,
@@ -143,8 +153,9 @@ export const products: Product[] = [
       "Tissu déperlant résistant",
     ],
     sizes: ["Taille unique"],
-    color: "Argile",
-    swatch: "#c1502e",
+    color: "Noir / Or",
+    base: "black",
+    accent: "gold",
   },
 ];
 

@@ -37,7 +37,7 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold">Votre panier est vide</h1>
         <Link
           href="/produits"
-          className="mt-6 inline-block rounded-full bg-brand-clay px-6 py-3 font-semibold text-white hover:bg-brand-clay-dark transition-colors"
+          className="mt-6 inline-block rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-black hover:bg-brand-gold-dark transition-colors"
         >
           Voir la collection
         </Link>
@@ -59,13 +59,13 @@ export default function CartPage() {
               className="flex items-center gap-4 rounded-xl border border-brand-line p-4"
             >
               <ProductVisual
-                name={product.name}
-                color={product.swatch}
+                base={product.base}
+                accent={product.accent}
                 className="h-20 w-16 rounded-lg shrink-0"
               />
               <div className="flex-1">
                 <p className="font-semibold">{product.name}</p>
-                <p className="text-sm text-brand-ink/60">Taille {item.size}</p>
+                <p className="text-sm text-brand-gray">Taille {item.size}</p>
                 <p className="text-sm font-medium mt-1">{formatPrice(product.price)}</p>
               </div>
               <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export default function CartPage() {
                   type="button"
                   aria-label="Diminuer la quantité"
                   onClick={() => updateQuantity(item.slug, item.size, item.quantity - 1)}
-                  className="h-8 w-8 rounded-full border border-brand-ink/20 hover:border-brand-ink"
+                  className="h-8 w-8 rounded-full border border-brand-black/20 hover:border-brand-black"
                 >
                   −
                 </button>
@@ -82,7 +82,7 @@ export default function CartPage() {
                   type="button"
                   aria-label="Augmenter la quantité"
                   onClick={() => updateQuantity(item.slug, item.size, item.quantity + 1)}
-                  className="h-8 w-8 rounded-full border border-brand-ink/20 hover:border-brand-ink"
+                  className="h-8 w-8 rounded-full border border-brand-black/20 hover:border-brand-black"
                 >
                   +
                 </button>
@@ -90,7 +90,7 @@ export default function CartPage() {
               <button
                 type="button"
                 onClick={() => removeItem(item.slug, item.size)}
-                className="ml-2 text-sm text-brand-ink/50 hover:text-brand-clay"
+                className="ml-2 text-sm text-brand-gray hover:text-brand-pink"
               >
                 Retirer
               </button>
@@ -104,13 +104,13 @@ export default function CartPage() {
         <p className="text-lg font-bold">{formatPrice(totalPrice)}</p>
       </div>
 
-      {error && <p className="mt-4 text-sm text-brand-clay">{error}</p>}
+      {error && <p className="mt-4 text-sm text-brand-pink">{error}</p>}
 
       <button
         type="button"
         onClick={handleCheckout}
         disabled={loading}
-        className="mt-6 w-full rounded-full bg-brand-clay px-6 py-3 font-semibold text-white hover:bg-brand-clay-dark transition-colors disabled:opacity-50"
+        className="mt-6 w-full rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-black hover:bg-brand-gold-dark transition-colors disabled:opacity-50"
       >
         {loading ? "Redirection..." : "Passer au paiement"}
       </button>

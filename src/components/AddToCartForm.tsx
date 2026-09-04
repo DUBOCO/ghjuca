@@ -28,8 +28,8 @@ export default function AddToCartForm({
             }}
             className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
               size === s
-                ? "border-brand-ink bg-brand-ink text-white"
-                : "border-brand-ink/20 hover:border-brand-ink"
+                ? "border-brand-black bg-brand-black text-white"
+                : "border-brand-black/20 hover:border-brand-black"
             }`}
           >
             {s}
@@ -43,7 +43,7 @@ export default function AddToCartForm({
           addItem(slug, size, 1);
           setAdded(true);
         }}
-        className="mt-6 w-full rounded-full bg-brand-clay px-6 py-3 font-semibold text-white hover:bg-brand-clay-dark transition-colors"
+        className="mt-6 w-full rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-black hover:bg-brand-gold-dark transition-colors"
       >
         {added ? "Ajouté ✓" : "Ajouter au panier"}
       </button>

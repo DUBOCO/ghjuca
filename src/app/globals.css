@@ -1,27 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf6ef;
-  --foreground: #14201f;
-  --brand-ink: #14201f;
-  --brand-navy: #14283a;
-  --brand-clay: #c1502e;
-  --brand-clay-dark: #a3411f;
-  --brand-sand: #f2e9dc;
-  --brand-sage: #3f5d4b;
-  --brand-line: #e3d9c6;
+  --background: #ffffff;
+  --foreground: #0b0b0c;
+  --brand-black: #0b0b0c;
+  --brand-white: #ffffff;
+  --brand-gold: #d9a441;
+  --brand-gold-dark: #b3852e;
+  --brand-pink: #ec1e8c;
+  --brand-pink-dark: #c2166f;
+  --brand-gray: #6b6b6b;
+  --brand-line: #e6e6e6;
+  --brand-line-dark: rgba(255, 255, 255, 0.14);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-ink: var(--brand-ink);
-  --color-brand-navy: var(--brand-navy);
-  --color-brand-clay: var(--brand-clay);
-  --color-brand-clay-dark: var(--brand-clay-dark);
-  --color-brand-sand: var(--brand-sand);
-  --color-brand-sage: var(--brand-sage);
+  --color-brand-black: var(--brand-black);
+  --color-brand-white: var(--brand-white);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-dark: var(--brand-gold-dark);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-pink-dark: var(--brand-pink-dark);
+  --color-brand-gray: var(--brand-gray);
   --color-brand-line: var(--brand-line);
+  --color-brand-line-dark: var(--brand-line-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -33,5 +37,7 @@ body {
 
 .brand-wordmark {
   font-weight: 800;
-  letter-spacing: -0.02em;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }

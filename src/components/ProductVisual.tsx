@@ -1,32 +1,42 @@
-function initials(name: string): string {
-  return name
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-}
+import GhjucaMark from "@/components/brand/GhjucaMark";
+import CourtMotif from "@/components/brand/CourtMotif";
+import type { Accent } from "@/lib/products";
+
+const accentColor: Record<Accent, string> = {
+  gold: "var(--brand-gold)",
+  pink: "var(--brand-pink)",
+};
 
 export default function ProductVisual({
-  name,
-  color,
+  base,
+  accent,
   className = "",
 }: {
-  name: string;
-  color: string;
+  base: "black" | "white";
+  accent: Accent;
   className?: string;
 }) {
+  const isBlack = base === "black";
+  const bg = isBlack ? "var(--brand-black)" : "var(--brand-white)";
+  const accentHex = accentColor[accent];
+
   return (
     <div
-      className={`flex items-center justify-center ${className}`}
-      style={{
-        background: `linear-gradient(155deg, ${color} 0%, ${color}cc 55%, #14201f 130%)`,
-      }}
+      className={`relative flex items-center justify-center overflow-hidden border ${
+        isBlack ? "border-white/10" : "border-brand-line"
+      } ${className}`}
+      style={{ background: bg }}
       aria-hidden="true"
     >
-      <span className="text-white/90 text-4xl font-extrabold tracking-tight">
-        {initials(name)}
-      </span>
+      <CourtMotif
+        color={accentHex}
+        className="absolute h-[70%] w-[70%] opacity-30"
+      />
+      <GhjucaMark
+        shieldColor={accentHex}
+        letterColor={isBlack ? "var(--brand-black)" : "var(--brand-white)"}
+        className="relative h-16 w-16 drop-shadow-sm"
+      />
     </div>
   );
 }

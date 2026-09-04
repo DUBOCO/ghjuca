@@ -23,8 +23,8 @@ export default async function ProductsPage({
           href="/produits"
           className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
             !categorie
-              ? "border-brand-ink bg-brand-ink text-white"
-              : "border-brand-ink/20 hover:border-brand-ink"
+              ? "border-brand-black bg-brand-black text-white"
+              : "border-brand-black/20 hover:border-brand-black"
           }`}
         >
           Tout
@@ -35,8 +35,8 @@ export default async function ProductsPage({
             href={`/produits?categorie=${cat}`}
             className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
               categorie === cat
-                ? "border-brand-ink bg-brand-ink text-white"
-                : "border-brand-ink/20 hover:border-brand-ink"
+                ? "border-brand-black bg-brand-black text-white"
+                : "border-brand-black/20 hover:border-brand-black"
             }`}
           >
             {cat}

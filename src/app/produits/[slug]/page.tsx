@@ -19,19 +19,19 @@ export default async function ProductPage({
   return (
     <div className="mx-auto max-w-6xl px-6 py-12 grid gap-10 lg:grid-cols-2">
       <ProductVisual
-        name={product.name}
-        color={product.swatch}
+        base={product.base}
+        accent={product.accent}
         className="aspect-[4/5] w-full rounded-2xl"
       />
 
       <div>
-        <p className="text-xs uppercase tracking-wide text-brand-ink/50">{product.category}</p>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight">{product.name}</h1>
-        <p className="mt-2 text-brand-ink/60">{product.color}</p>
+        <p className="text-xs uppercase tracking-wide text-brand-gray">{product.category}</p>
+        <h1 className="mt-1 text-3xl font-extrabold italic tracking-tight">{product.name}</h1>
+        <p className="mt-2 text-brand-gray">{product.color}</p>
         <p className="mt-4 text-2xl font-semibold">{formatPrice(product.price)}</p>
-        <p className="mt-6 text-brand-ink/80 leading-relaxed">{product.description}</p>
+        <p className="mt-6 text-brand-black/80 leading-relaxed">{product.description}</p>
 
-        <ul className="mt-6 space-y-1 text-sm text-brand-ink/70 list-disc list-inside">
+        <ul className="mt-6 space-y-1 text-sm text-brand-gray list-disc list-inside">
           {product.details.map((d) => (
             <li key={d}>{d}</li>
           ))}
