@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
-import { formatPrice, getProductBySlug } from "@/lib/products";
+import { useProducts } from "@/lib/products-context";
+import { formatPrice } from "@/lib/types";
 import ProductVisual from "@/components/ProductVisual";
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, totalPrice } = useCart();
+  const { getProductBySlug } = useProducts();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

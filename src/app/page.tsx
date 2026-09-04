@@ -1,9 +1,12 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import CourtMotif from "@/components/brand/CourtMotif";
-import { products } from "@/lib/products";
+import { getProducts } from "@/lib/products";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const products = await getProducts();
   const featured = products.slice(0, 4);
 
   return (

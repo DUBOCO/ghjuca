@@ -1,8 +1,10 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/lib/products";
+import { getProducts } from "@/lib/products";
 
 const categories = ["Homme", "Femme", "Accessoires"] as const;
+
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage({
   searchParams,
@@ -10,6 +12,7 @@ export default async function ProductsPage({
   searchParams: Promise<{ categorie?: string }>;
 }) {
   const { categorie } = await searchParams;
+  const products = await getProducts();
   const filtered = categorie
     ? products.filter((p) => p.category === categorie)
     : products;

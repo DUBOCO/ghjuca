@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getProductBySlug } from "@/lib/products";
+import { useProducts } from "@/lib/products-context";
 
 export type CartItem = {
   slug: string;
@@ -31,6 +31,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_KEY = "ghjuca-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { getProductBySlug } = useProducts();
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
@@ -90,7 +91,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       },
       { totalItems: 0, totalPrice: 0 }
     );
-  }, [items]);
+  }, [items, getProductBySlug]);
 
   const value = useMemo(
     () => ({ items, addItem, removeItem, updateQuantity, clear, totalItems, totalPrice }),

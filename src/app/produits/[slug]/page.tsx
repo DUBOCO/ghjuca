@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
 import ProductVisual from "@/components/ProductVisual";
 import AddToCartForm from "@/components/AddToCartForm";
-import { formatPrice, getProductBySlug, products } from "@/lib/products";
+import { formatPrice, getProductBySlug } from "@/lib/products";
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProductPage({
   params,
@@ -13,7 +11,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   return (

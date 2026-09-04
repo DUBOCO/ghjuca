@@ -1,171 +1,78 @@
-export type Accent = "gold" | "pink";
+import "server-only";
+import { prisma } from "@/lib/db";
+import type { Product } from "@/lib/types";
+import { seedProducts } from "@/lib/seed-data";
 
-export type Product = {
-  slug: string;
-  name: string;
-  category: "Homme" | "Femme" | "Accessoires";
-  price: number; // en euros
-  description: string;
-  details: string[];
-  sizes: string[];
-  color: string;
-  base: "black" | "white"; // couleur dominante du vêtement
-  accent: Accent; // couleur d'accent brodée/imprimée
-};
+export { formatPrice } from "@/lib/types";
+export type { Product, Category, Base, Accent } from "@/lib/types";
 
-export const products: Product[] = [
-  {
-    slug: "polo-technique-homme-noir",
-    name: "Polo Technique Ghjucà",
-    category: "Homme",
-    price: 69,
-    description:
-      "Polo de padel en tissu technique respirant, coupe ajustée pour une liberté de mouvement totale sur le court.",
-    details: [
-      "Tissu technique 4-way stretch anti-transpiration",
-      "Traitement anti-odeur",
-      "Coupe ajustée athlétique",
-      "Broderie Ghjucà et liseré or sur la poitrine",
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    color: "Noir / Or",
-    base: "black",
-    accent: "gold",
-  },
-  {
-    slug: "short-performance-homme-noir",
-    name: "Short Performance",
-    category: "Homme",
-    price: 59,
-    description:
-      "Short léger et résistant pensé pour les déplacements rapides, avec poche zippée pour balle de padel.",
-    details: [
-      "Tissu stretch ultra-léger",
-      "Poche zippée sécurisée",
-      "Ceinture élastique ajustable",
-      "Découpe articulée pour la mobilité",
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    color: "Noir / Or",
-    base: "black",
-    accent: "gold",
-  },
-  {
-    slug: "debardeur-technique-femme-blanc",
-    name: "Débardeur Technique",
-    category: "Femme",
-    price: 49,
-    description:
-      "Débardeur technique à séchage rapide, coupe féminine ajustée pour un confort optimal en jeu.",
-    details: [
-      "Séchage rapide",
-      "Coupe ajustée féminine",
-      "Empiècements respirants dans le dos",
-      "Signature Ghjucà rose sur la poitrine",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-    color: "Blanc / Rose",
-    base: "white",
-    accent: "pink",
-  },
-  {
-    slug: "jupe-short-femme-blanc",
-    name: "Jupe-Short Performance",
-    category: "Femme",
-    price: 65,
-    description:
-      "Jupe-short technique avec short intégré, pensée pour combiner style et performance sur le court.",
-    details: [
-      "Short intégré pour une liberté totale",
-      "Tissu 4-way stretch",
-      "Poche balle de padel intégrée",
-      "Taille haute confortable",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-    color: "Blanc / Rose",
-    base: "white",
-    accent: "pink",
-  },
-  {
-    slug: "veste-coupe-vent-unisexe-noir",
-    name: "Veste Coupe-Vent",
-    category: "Accessoires",
-    price: 89,
-    description:
-      "Veste coupe-vent légère et compressible, indispensable pour l'échauffement et les jours de vent.",
-    details: [
-      "Déperlant et coupe-vent",
-      "Compressible dans sa poche dédiée",
-      "Coupe unisexe",
-      "Fermeture éclair YKK",
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    color: "Noir / Or",
-    base: "black",
-    accent: "gold",
-  },
-  {
-    slug: "polo-technique-femme-blanc",
-    name: "Polo Technique Ghjucà",
-    category: "Femme",
-    price: 69,
-    description:
-      "Polo de padel technique en coupe féminine, respirant et extensible pour un confort maximal.",
-    details: [
-      "Tissu technique 4-way stretch",
-      "Traitement anti-odeur",
-      "Coupe ajustée féminine",
-      "Broderie Ghjucà et liseré rose sur la poitrine",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-    color: "Blanc / Rose",
-    base: "white",
-    accent: "pink",
-  },
-  {
-    slug: "casquette-ghjuca-noir",
-    name: "Casquette Ghjucà",
-    category: "Accessoires",
-    price: 29,
-    description: "Casquette technique légère avec bandeau anti-transpiration et logo brodé.",
-    details: [
-      "Tissu léger et respirant",
-      "Bandeau anti-transpiration",
-      "Taille ajustable",
-      "Logo Ghjucà brodé or",
-    ],
-    sizes: ["Taille unique"],
-    color: "Noir / Or",
-    base: "black",
-    accent: "gold",
-  },
-  {
-    slug: "sac-padel-ghjuca-noir",
-    name: "Sac de Padel Ghjucà",
-    category: "Accessoires",
-    price: 119,
-    description:
-      "Sac de padel spacieux avec compartiment ventilé pour les raquettes et poche chaussures dédiée.",
-    details: [
-      "Compartiment raquettes rembourré",
-      "Poche chaussures ventilée",
-      "Bandoulière réglable",
-      "Tissu déperlant résistant",
-    ],
-    sizes: ["Taille unique"],
-    color: "Noir / Or",
-    base: "black",
-    accent: "gold",
-  },
-];
+let schemaReady: Promise<void> | null = null;
 
-export function getProductBySlug(slug: string): Product | undefined {
+function ensureSchema(): Promise<void> {
+  if (!schemaReady) {
+    schemaReady = prisma
+      .$executeRawUnsafe(
+        `CREATE TABLE IF NOT EXISTS "Product" (
+          "id" TEXT PRIMARY KEY,
+          "slug" TEXT UNIQUE NOT NULL,
+          "name" TEXT NOT NULL,
+          "category" TEXT NOT NULL,
+          "price" DOUBLE PRECISION NOT NULL,
+          "description" TEXT NOT NULL,
+          "details" TEXT[] NOT NULL,
+          "sizes" TEXT[] NOT NULL,
+          "color" TEXT NOT NULL,
+          "base" TEXT NOT NULL,
+          "accent" TEXT NOT NULL,
+          "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+        );`
+      )
+      .then(async () => {
+        const count = await prisma.product.count();
+        if (count === 0) {
+          await prisma.product.createMany({ data: seedProducts });
+        }
+      });
+  }
+  return schemaReady;
+}
+
+async function withFallback<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    await ensureSchema();
+    return await fn();
+  } catch (error) {
+    console.error(
+      "Ghjucà: base de données indisponible, utilisation du catalogue par défaut.",
+      error
+    );
+    schemaReady = null;
+    return fallback;
+  }
+}
+
+export async function getProducts(): Promise<Product[]> {
+  return withFallback(
+    async () => {
+      const rows = await prisma.product.findMany({ orderBy: { createdAt: "asc" } });
+      return rows as unknown as Product[];
+    },
+    seedProducts.map((p, i) => ({ id: `seed-${i}`, ...p }))
+  );
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const products = await getProducts();
   return products.find((p) => p.slug === slug);
 }
 
-export function formatPrice(amount: number): string {
-  return new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-  }).format(amount);
+export async function createProduct(data: Omit<Product, "id">): Promise<Product> {
+  await ensureSchema();
+  const row = await prisma.product.create({ data });
+  return row as unknown as Product;
+}
+
+export async function deleteProduct(id: string): Promise<void> {
+  await ensureSchema();
+  await prisma.product.delete({ where: { id } });
 }

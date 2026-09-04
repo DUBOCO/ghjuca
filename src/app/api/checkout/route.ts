@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
   const line_items = [];
   for (const item of items) {
-    const product = getProductBySlug(item.slug);
+    const product = await getProductBySlug(item.slug);
     const quantity = Math.max(1, Math.min(20, Math.trunc(item.quantity)));
     if (!product || !product.sizes.includes(item.size) || !Number.isFinite(quantity)) {
       return NextResponse.json({ error: "Article invalide dans le panier." }, { status: 400 });

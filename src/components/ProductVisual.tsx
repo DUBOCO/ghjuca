@@ -1,6 +1,6 @@
 import GhjucaMark from "@/components/brand/GhjucaMark";
 import CourtMotif from "@/components/brand/CourtMotif";
-import type { Accent } from "@/lib/products";
+import type { Accent } from "@/lib/types";
 
 const accentColor: Record<Accent, string> = {
   gold: "var(--brand-gold)",

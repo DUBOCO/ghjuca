@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ProductVisual from "@/components/ProductVisual";
-import { formatPrice, type Product } from "@/lib/products";
+import { formatPrice, type Product } from "@/lib/types";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
