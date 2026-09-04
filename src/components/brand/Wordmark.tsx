@@ -14,17 +14,14 @@ export default function Wordmark({
     >
       <span className="brand-wordmark">Ghjucà</span>
       <svg
-        viewBox="0 0 120 10"
-        className="mt-0.5 h-[6px] w-full"
+        viewBox="0 0 120 12"
+        className="mt-0.5 h-[7px] w-full"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
         <path
-          d="M2,8 Q60,-3 118,4"
-          fill="none"
-          stroke={swooshColor ?? color}
-          strokeWidth="4"
-          strokeLinecap="round"
+          d="M0,10 C40,-2 80,0 110,3 L120,0 L112,6.5 C80,4 40,4.5 0,10 Z"
+          fill={swooshColor ?? color}
         />
       </svg>
     </span>

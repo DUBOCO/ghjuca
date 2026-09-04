@@ -2,13 +2,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0b0b0c;
-  --brand-black: #0b0b0c;
+  --foreground: #0a0a0a;
+  --brand-black: #0a0a0a;
   --brand-white: #ffffff;
-  --brand-gold: #d9a441;
-  --brand-gold-dark: #b3852e;
-  --brand-pink: #ec1e8c;
-  --brand-pink-dark: #c2166f;
+  --brand-gold: #f2a93d;
+  --brand-gold-dark: #c9821f;
+  --brand-pink: #ff1694;
+  --brand-pink-dark: #d4127a;
   --brand-gray: #6b6b6b;
   --brand-line: #e6e6e6;
   --brand-line-dark: rgba(255, 255, 255, 0.14);

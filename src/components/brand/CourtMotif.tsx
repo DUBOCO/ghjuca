@@ -24,6 +24,13 @@ export default function CourtMotif({
       <path d="M100,20 L100,120" strokeWidth="1.5" />
       {/* filet */}
       <path d="M32,68 L168,68" strokeWidth="6" />
+      <path
+        d="M36,68 L164,68"
+        strokeWidth="1"
+        strokeDasharray="1.5 2.5"
+        stroke="var(--brand-black)"
+        opacity="0.35"
+      />
     </svg>
   );
 }
